@@ -1,0 +1,38 @@
+#ifndef GeometryController_hh
+#define GeometryController_hh 1
+
+#include "Config.hh"
+#include "VDetectorConstruction.hh"
+#include "G4String.hh"
+#include "G4VUserDetectorConstruction.hh"
+#include "globals.hh"
+
+/**
+ * Controller for geometry selection
+ *
+ * This controller is called by the geometry messenger and used to
+ * select the geometry. Each available geometry must have unique name
+ * and it must be known by the geometry controller.
+ */
+class GeometryController
+{
+public:
+  explicit GeometryController(Config& _par);
+  ~GeometryController();
+
+  /**
+   * Select a geometry by name.
+   */
+  int SetGeometry(G4String);
+  const std::vector<G4String>& GetNameDetectors();
+  void ConvertG4toRoot(const std::string& nameConvertRoot);
+
+private:
+  void registerGeometry(G4VUserDetectorConstruction* det);
+
+  Config& Par;
+  G4String nameGeometry;
+  VDetectorConstruction* detectorBuilder;
+};
+
+#endif

@@ -1,0 +1,24 @@
+# Macro file for hibeam_g4
+# 
+# Can be run in batch, without graphic
+# or interactively: Idle> /control/execute run_gps.mac
+#
+#
+# Initialize kernel
+/run/initialize
+#
+# Example create pions with isotropic angular distribution in cylinder corresponding to HIBEAM target.
+/gps/particle pi+
+/gps/pos/type Volume
+/gps/pos/shape Cylinder
+/gps/pos/centre 0. 0. 0. cm
+/gps/pos/radius 20. cm
+/gps/pos/halfz 0.005 cm
+/gps/ang/type iso
+/gps/ene/type Lin
+/gps/ene/min 1. MeV
+/gps/ene/max 500. MeV
+/gps/ene/gradient 0.
+/gps/ene/intercept 1.
+
+/run/beamOn 100

@@ -1,0 +1,9 @@
+# Macro file for hibeam_g4
+# 
+# Can be run in batch, without graphic
+# or interactively: Idle> /control/execute run_mcpl.mac
+#
+#
+# Initialize kernel
+/run/initialize
+/run/beamOn 100000

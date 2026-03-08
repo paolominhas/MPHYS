@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+env/
+.env
+.venv/
+
+# Secrets
+.env.local
+.env.*.local
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Build artifacts
+dist/
+build/
+*.egg-info/
+
+# Large data files - THIS IS THE CRITICAL PART
+*.pdf
+*.jpg
+*.jpeg
+*.png
+*.root
+*.mcpl
+
+# Compiled objects / shared libs
+*.o
+*.so
+*.pcm

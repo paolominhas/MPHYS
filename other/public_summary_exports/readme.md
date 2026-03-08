@@ -1,0 +1,3 @@
+# A Brief Summary of what is going on here
+
+I wanted to have a live video of simulation or a 3D simulation on my webpage I have made for the public summary for my MPhys project on this research. This required exporting the ROOT files to jsons that could be read in (the project is written using Next.js). The other code and info on this project are to be found on github which is linked on the site itself: at paolo.org.uk.
