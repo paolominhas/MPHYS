@@ -42,6 +42,14 @@ void ProtoTPCHit::push_back(double e, double t, double x, double y, double z, in
 	Layer.push_back(l);
 }
 
+void ProtoTPCHit::process()
+{
+	swap_xy();
+	shift();
+	assign_pads();
+	sum_up();
+}
+
 void ProtoTPCHit::add_pad(int pr, int pc, int ts, double s)
 {
 	padRow.push_back(pr);
@@ -56,10 +64,11 @@ void ProtoTPCHit::assign_pads()
 {
 	int row, col, ts;
 	double sig;
+	t0=44;
 	for(int i=0; i<nHits; i++){
 		row = int(Pos_Y[i]/padHeight);
 		col = int(Pos_X[i]/padWidth)-1;
-		ts = int(Pos_Z[i]/timeBin/driftV)-5;
+		ts = int(Pos_Z[i]/timeBin/driftV)+t0-5;
 		sig = Edep[i]/ionE;
 		for(int j=0; j<3; j++){
 			for(int k=0; k<40; k++){
@@ -73,7 +82,6 @@ void ProtoTPCHit::swap_xy()
 {
 	swap(Pos_X,Pos_Y);
 }
-
 
 void ProtoTPCHit::shift()
 {
@@ -95,12 +103,9 @@ void ProtoTPCHit::sum_up()
 			}
 		}
 	}
-}
 
-void ProtoTPCHit::clean_up()
-{
 	for(int i=0; i<nSignals; i++){
-		if(signal[i]<50){
+		if(signal[i]<threshold){
 			erase(i);
 			i--;
 			continue;
@@ -133,6 +138,7 @@ void ProtoTPCHit::clear()
 	padRow.clear();
 	timestamp.clear();
 	signal.clear();
+	t0=0;
 
 	SumEdep=0.;
 }

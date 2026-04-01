@@ -1,0 +1,73 @@
+HIBEAM dE/dx  Data vs Simulation  —  Moyal (Landau) Fit Results
+Truncation: bottom 70%
+Track cuts: chi2/ndf < 25.0,  nPoints >= 3
+Sim cuts:   nSteps >= 3
+Error model: Poisson errors inflated by sqrt(cluster_factor)
+  to account for intra-track centroid correlations
+
+============================================================
+Krakow $^2$H(p,p)  —  run 0006
+============================================================
+Data peak (raw): 166.528 ADC/mm
+Sim  peak (raw): 94.5887 MeV
+  Data:
+    MPV        = 1.0742
+    xi         = 0.3855
+    xi_err     = 0.0022
+    chi2/ndf   = 22.19
+  Simulation:
+    MPV        = 1.0446
+    xi         = 0.1838
+    xi_err     = 0.0060
+    chi2/ndf   = 47.16
+
+============================================================
+Krakow $^2$H(p,p)  —  run 0042
+============================================================
+Data peak (raw): 197.277 ADC/mm
+Sim  peak (raw): 94.5887 MeV
+  Data:
+    MPV        = 1.1460
+    xi         = 0.4908
+    xi_err     = 0.0018
+    chi2/ndf   = 231.82
+  Simulation:
+    MPV        = 1.0548
+    xi         = 0.1891
+    xi_err     = 0.0068
+    chi2/ndf   = 46.60
+
+============================================================
+Muon lab (MCPL)  —  run 0006
+============================================================
+Data peak (raw): 166.528 ADC/mm
+Sim  peak (raw): 30.7591 MeV
+Sim low-E cut:   15 MeV
+  Data:
+    MPV        = 1.0672
+    xi         = 0.3521
+    xi_err     = 0.0016
+    chi2/ndf   = 28.94
+  Simulation:
+    MPV        = 0.6942
+    xi         = 0.0969
+    xi_err     = 0.0002
+    chi2/ndf   = 1453.83
+
+============================================================
+Muon lab (MCPL)  —  run 0042
+============================================================
+Data peak (raw): 197.277 ADC/mm
+Sim  peak (raw): 30.7591 MeV
+Sim low-E cut:   15 MeV
+  Data:
+    MPV        = 1.1696
+    xi         = 0.4108
+    xi_err     = 0.0011
+    chi2/ndf   = 288.14
+  Simulation:
+    MPV        = 0.6942
+    xi         = 0.0969
+    xi_err     = 0.0002
+    chi2/ndf   = 1453.83
+

@@ -33,11 +33,12 @@ Run the program with
 ```
 
 The program detects automatically data from which detectors is in the input file based on the root branch names. Supported detectors/branches are:
-* ``Primary*``: Source/particle generator informatio.
+* ``Primary*``: Source/particle generator information.
 * ``TARGET*``: Particle hits in HIBEAM target.
 * ``TPC*``: Data from HIBEAM/NNBAR TPC.
 * ``ProtoTPC*``: Data from TPC prototype at LU.
 * ``SECE*``: Data from WASA calorimeter.
 * ``CV_bar*``: Data from HIBEAM/NNBAR cosmic veto detector.
-* ``Sci_bar*``: Data from HIBEAM/NNBAR HRD scintillators with WLS readout.
+* ``HRDBar*``: Data from HIBEAM/NNBAR HRD scintillators with WLS readout.
 * ``Scintillator*``: Data from generic scintillator detector.
+* ``TrigSci*``: Data from trigger scintillator detector.

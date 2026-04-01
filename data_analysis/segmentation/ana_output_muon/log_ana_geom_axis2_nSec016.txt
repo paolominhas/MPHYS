@@ -1,0 +1,128 @@
+Reading from file ./sim_output_muon/sim_geom_axis2_nSec016.root
+Writing to file ./ana_output_muon//ana_geom_axis2_nSec016.root
+The input file contains source data.
+The input file contains TPC prototype data.
+Begin analysis.
+0 events read.
+10000 events read.
+20000 events read.
+30000 events read.
+40000 events read.
+50000 events read.
+60000 events read.
+70000 events read.
+80000 events read.
+90000 events read.
+******************************************************************************
+*Tree    :hibeam    : Processed HIBEAM simulation output                     *
+*Entries :   100000 : Total =       109216213 bytes  File  Size =   30176203 *
+*        :          : Tree compression factor =   3.19                       *
+******************************************************************************
+*Br    0 :PrimaryTrackID : vector<int>                                       *
+*Entries :   100000 : Total  Size=    1807718 bytes  File Size  =     148240 *
+*Baskets :       61 : Basket Size=    2132480 bytes  Compression=  10.71     *
+*............................................................................*
+*Br    1 :PrimaryPDG : vector<int>                                           *
+*Entries :   100000 : Total  Size=    1807450 bytes  File Size  =     267080 *
+*Baskets :       61 : Basket Size=    2131968 bytes  Compression=   5.94     *
+*............................................................................*
+*Br    2 :PrimaryEkin : vector<double>                                       *
+*Entries :   100000 : Total  Size=    2208921 bytes  File Size  =     928429 *
+*Baskets :       72 : Basket Size=    2449920 bytes  Compression=   2.09     *
+*............................................................................*
+*Br    3 :PrimaryTime : vector<double>                                       *
+*Entries :   100000 : Total  Size=    2208921 bytes  File Size  =     155235 *
+*Baskets :       72 : Basket Size=    2449920 bytes  Compression=  12.50     *
+*............................................................................*
+*Br    4 :PrimaryPosX : vector<double>                                       *
+*Entries :   100000 : Total  Size=    2208921 bytes  File Size  =     867936 *
+*Baskets :       72 : Basket Size=    2449920 bytes  Compression=   2.24     *
+*............................................................................*
+*Br    5 :PrimaryPosY : vector<double>                                       *
+*Entries :   100000 : Total  Size=    2208921 bytes  File Size  =     154975 *
+*Baskets :       72 : Basket Size=    2449920 bytes  Compression=  12.52     *
+*............................................................................*
+*Br    6 :PrimaryPosZ : vector<double>                                       *
+*Entries :   100000 : Total  Size=    2208921 bytes  File Size  =     868049 *
+*Baskets :       72 : Basket Size=    2449920 bytes  Compression=   2.24     *
+*............................................................................*
+*Br    7 :PrimaryMomX : vector<double>                                       *
+*Entries :   100000 : Total  Size=    2208921 bytes  File Size  =     970074 *
+*Baskets :       72 : Basket Size=    2449920 bytes  Compression=   2.00     *
+*............................................................................*
+*Br    8 :PrimaryMomY : vector<double>                                       *
+*Entries :   100000 : Total  Size=    2208921 bytes  File Size  =     929455 *
+*Baskets :       72 : Basket Size=    2449920 bytes  Compression=   2.09     *
+*............................................................................*
+*Br    9 :PrimaryMomZ : vector<double>                                       *
+*Entries :   100000 : Total  Size=    2208921 bytes  File Size  =     970196 *
+*Baskets :       72 : Basket Size=    2449920 bytes  Compression=   2.00     *
+*............................................................................*
+*Br   10 :PrimaryWeight : vector<double>                                     *
+*Entries :   100000 : Total  Size=    2209077 bytes  File Size  =     155927 *
+*Baskets :       72 : Basket Size=    2449920 bytes  Compression=  12.44     *
+*............................................................................*
+*Branch  :ProtoTPC                                                           *
+*Entries :   100000 : BranchElement (see below)                              *
+*............................................................................*
+*Br   11 :TObject   : BASE                                                   *
+*Entries :   100000 : Total  Size=    1422089 bytes  File Size  =     166839 *
+*Baskets :      200 : Basket Size=     984064 bytes  Compression=   7.48     *
+*............................................................................*
+*Br   12 :nHits     : Int_t                                                  *
+*Entries :   100000 : Total  Size=     404883 bytes  File Size  =      57685 *
+*Baskets :       45 : Basket Size=      79872 bytes  Compression=   6.15     *
+*............................................................................*
+*Br   13 :SumEdep   : Double_t                                               *
+*Entries :   100000 : Total  Size=     809385 bytes  File Size  =      12720 *
+*Baskets :       89 : Basket Size=     159744 bytes  Compression=  55.81     *
+*............................................................................*
+*Br   14 :Edep      : vector<double>                                         *
+*Entries :   100000 : Total  Size=    4365140 bytes  File Size  =    2874583 *
+*Baskets :      525 : Basket Size=    1566720 bytes  Compression=   1.33     *
+*............................................................................*
+*Br   15 :Time      : vector<double>                                         *
+*Entries :   100000 : Total  Size=    4365140 bytes  File Size  =    2852484 *
+*Baskets :      525 : Basket Size=    1566720 bytes  Compression=   1.34     *
+*............................................................................*
+*Br   16 :Pos_X     : vector<double>                                         *
+*Entries :   100000 : Total  Size=    4365671 bytes  File Size  =    1148268 *
+*Baskets :      525 : Basket Size=    1566720 bytes  Compression=   3.34     *
+*............................................................................*
+*Br   17 :Pos_Y     : vector<double>                                         *
+*Entries :   100000 : Total  Size=    4365671 bytes  File Size  =    2894154 *
+*Baskets :      525 : Basket Size=    1566720 bytes  Compression=   1.33     *
+*............................................................................*
+*Br   18 :Pos_Z     : vector<double>                                         *
+*Entries :   100000 : Total  Size=    4365671 bytes  File Size  =    2872189 *
+*Baskets :      525 : Basket Size=    1566720 bytes  Compression=   1.34     *
+*............................................................................*
+*Br   19 :Layer     : vector<int>                                            *
+*Entries :   100000 : Total  Size=    2893727 bytes  File Size  =     514376 *
+*Baskets :      363 : Basket Size=    1275392 bytes  Compression=   4.94     *
+*............................................................................*
+*Br   20 :nSignals  : Int_t                                                  *
+*Entries :   100000 : Total  Size=     405036 bytes  File Size  =      70864 *
+*Baskets :       45 : Basket Size=      80384 bytes  Compression=   5.01     *
+*............................................................................*
+*Br   21 :padRow    : vector<int>                                            *
+*Entries :   100000 : Total  Size=   14385291 bytes  File Size  =    1476303 *
+*Baskets :     1672 : Basket Size=    3550208 bytes  Compression=   8.57     *
+*............................................................................*
+*Br   22 :padColumn : vector<int>                                            *
+*Entries :   100000 : Total  Size=   14390325 bytes  File Size  =    1295026 *
+*Baskets :     1672 : Basket Size=    3551232 bytes  Compression=   9.77     *
+*............................................................................*
+*Br   23 :timestamp : vector<int>                                            *
+*Entries :   100000 : Total  Size=   14390325 bytes  File Size  =    2705284 *
+*Baskets :     1672 : Basket Size=    3551232 bytes  Compression=   4.68     *
+*............................................................................*
+*Br   24 :signal    : vector<int>                                            *
+*Entries :   100000 : Total  Size=   14385291 bytes  File Size  =    4719037 *
+*Baskets :     1672 : Basket Size=    3550208 bytes  Compression=   2.68     *
+*............................................................................*
+*Br   25 :t0        : Int_t                                                  *
+*Entries :   100000 : Total  Size=     404730 bytes  File Size  =       6545 *
+*Baskets :       45 : Basket Size=      79872 bytes  Compression=  54.21     *
+*............................................................................*
+Finished. 100000 events read in total.

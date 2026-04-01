@@ -8,9 +8,9 @@
 #include "ProtoTPCHit.hh"
 #include "TPCHit.hh"
 #include "CVHit.hh"
-#include "SimpleSciHit.hh"
-#include "ScintHit.hh"
-#include "ScintAna.hh"
+#include "TrigSciHit.hh"
+#include "GenSciHit.hh"
+#include "HRDSciHit.hh"
 #include "hibeam_g4.h"
 #include "hibeam_g4_source.h"
 
@@ -52,9 +52,9 @@ int main(int argc, char *argv[])
 
 	hibeam_g4_source source; 
 	hibeam_g4 target;
-	hibeam_g4 tpc, prototpc;
+	hibeam_g4 tpc, protoTPC;
 	hibeam_g4 cv, cvs;
-	hibeam_g4 sci, scint;
+	hibeam_g4 trigSci, genSci, hrdSci;
 	std::vector<hibeam_g4> sec;
 	sec.clear();
 
@@ -72,7 +72,7 @@ int main(int argc, char *argv[])
 	}
 	if(tree->GetListOfBranches()->FindObject("ProtoTPC_TrackID")){
 		printf("The input file contains TPC prototype data.\n");
-		prototpc.Init(tree,"ProtoTPC");
+		protoTPC.Init(tree,"ProtoTPC");
 	}
 	if(tree->GetListOfBranches()->FindObject("SECE1_TrackID")){
 		printf("The input file contains SEC data.\n");
@@ -86,23 +86,30 @@ int main(int argc, char *argv[])
 		cv.Init(tree,"CV_bar");
 		cvs.Init(tree,"CV_shortbar");
 	}
+	if(tree->GetListOfBranches()->FindObject("trigSci_TrackID")){
+		printf("The input file contains trigger scintillator data.\n");
+		trigSci.Init(tree,"trigSci");
+	}
 	if(tree->GetListOfBranches()->FindObject("Scintillator_TrackID")){
 		printf("The input file contains generic scintillator data.\n");
-		sci.Init(tree,"Scintillator");
+		genSci.Init(tree,"Scintillator");
 	}
 	if(tree->GetListOfBranches()->FindObject("Sci_bar_TrackID")){
 		printf("The input file contains scintillator prototype data.\n");
-		scint.Init(tree,"Sci_bar");
+		hrdSci.Init(tree,"Sci_bar");
+	}
+	else if(tree->GetListOfBranches()->FindObject("HRDBar_TrackID")){
+		printf("The input file contains scintillator prototype data.\n");
+		hrdSci.Init(tree,"HRDBar");
 	}
 
-
-	SECHit *secH = nullptr;
-	TPCHit *tpcH = nullptr;
-	ProtoTPCHit *prototpcH = nullptr;
-	CVHit *cvH = nullptr;
-	SimpleSciHit *sciH = nullptr;
-	ScintHit *scintH = nullptr;
-	ScintAna *scintA = nullptr;
+	SECHit *hitSEC = nullptr;
+	TPCHit *hitTPC = nullptr;
+	ProtoTPCHit *hitProtoTPC = nullptr;
+	CVHit *hitCV = nullptr;
+	TrigSciHit *hitTrigSci = nullptr;
+	GenSciHit *hitGenSci = nullptr;
+	HRDSciHit *hitHRDSci = nullptr;
 	
 	TFile *fout = TFile::Open(outname,"RECREATE");
 	TTree *newtree = new TTree("hibeam", "Processed HIBEAM simulation output");
@@ -114,24 +121,26 @@ int main(int argc, char *argv[])
 		target.AddToOutput(newtree,"target");
 	}
 	if(sec.size()>0){
-		newtree->Branch("SEC",&secH,8000,1);
+		newtree->Branch("SEC",&hitSEC,8000,1);
 	}
 	if(tpc.fChain!=0){
-		newtree->Branch("TPC",&tpcH,8000,1);
+		newtree->Branch("TPC",&hitTPC,8000,1);
 	}
-	if(prototpc.fChain!=0){
-		//prototpc.AddToOutput(newtree,"proto");
-		newtree->Branch("ProtoTPC",&prototpcH,8000,1);
+	if(protoTPC.fChain!=0){
+		//protoTPC.AddToOutput(newtree,"proto");
+		newtree->Branch("ProtoTPC",&hitProtoTPC,8000,1);
 	}
 	if(cv.fChain!=0||cvs.fChain!=0){
-		newtree->Branch("CV",&cvH,8000,1);
+		newtree->Branch("CV",&hitCV,8000,1);
 	}
-	if(sci.fChain!=0){
-		newtree->Branch("Scintillator",&sciH,8000,1);
+	if(trigSci.fChain!=0){
+		newtree->Branch("trigSci",&hitTrigSci,8000,1);
 	}
-	if(scint.fChain!=0){
-		newtree->Branch("Scint",&scintH,8000,1);
-		newtree->Branch("ScintAna",&scintA,8000,1);
+	if(genSci.fChain!=0){
+		newtree->Branch("Scintillator",&hitGenSci,8000,1);
+	}
+	if(hrdSci.fChain!=0){
+		newtree->Branch("HRD",&hitHRDSci,8000,1);
 	}
 
 
@@ -145,67 +154,64 @@ int main(int argc, char *argv[])
 		prev_trackid=-1;
 
 		if(sec.size()>0){
-			secH->clear();
+			hitSEC->clear();
 			for (int is=0; is<17; is++){
 				for (int iv=0; iv<sec[is].TrackID->size(); iv++){
-					secH->push_back(is, sec[is].LayerID->at(iv), sec[is].EDep->at(iv), sec[is].Time->at(iv), sec[is].Position_X->at(iv), sec[is].Position_Y->at(iv), sec[is].Position_Z->at(iv));
+					hitSEC->push_back(is, sec[is].LayerID->at(iv), sec[is].EDep->at(iv), sec[is].Time->at(iv), sec[is].Position_X->at(iv), sec[is].Position_Y->at(iv), sec[is].Position_Z->at(iv));
 				}
 			}
-			secH->add_up();
-			secH->sort();
+			hitSEC->add_up();
+			hitSEC->sort();
 		}
 
 		if(tpc.fChain!=0){
-			tpcH->clear();
+			hitTPC->clear();
 			for (int iv=0; iv<tpc.TrackID->size(); iv++){
-				tpcH->push_back(tpc.EDep->at(iv), tpc.Time->at(iv), tpc.Position_X->at(iv), tpc.Position_Y->at(iv), tpc.Position_Z->at(iv));
+				hitTPC->assign_pads(tpc.EDep->at(iv), tpc.Time->at(iv), tpc.Position_X->at(iv), tpc.Position_Y->at(iv), tpc.Position_Z->at(iv));
 			}
-			tpcH->add_up();
+			hitTPC->add_up();
 		}
-		if(prototpc.fChain!=0){
-			prototpcH->clear();
-			for (int iv=0; iv<prototpc.TrackID->size(); iv++){
-				prototpcH->push_back(prototpc.EDep->at(iv), prototpc.Time->at(iv), prototpc.Position_X->at(iv), prototpc.Position_Y->at(iv), prototpc.Position_Z->at(iv), prototpc.LayerID->at(iv));
+		if(protoTPC.fChain!=0){
+			hitProtoTPC->clear();
+			for (int iv=0; iv<protoTPC.TrackID->size(); iv++){
+				hitProtoTPC->push_back(protoTPC.EDep->at(iv), protoTPC.Time->at(iv), protoTPC.Position_X->at(iv), protoTPC.Position_Y->at(iv), protoTPC.Position_Z->at(iv), protoTPC.LayerID->at(iv));
 			}
-			prototpcH->swap_xy();
-			prototpcH->shift();
-			prototpcH->assign_pads();
-			prototpcH->sum_up();
-			prototpcH->clean_up();
+			hitProtoTPC->process();
 		}
 		if(cv.fChain!=0||cvs.fChain!=0){
-			cvH->clear();
+			hitCV->clear();
 			for (int iv=0; iv<cv.TrackID->size(); iv++){
-				cvH->push_back(cv.LayerID->at(iv), cv.LayerID1->at(iv), cv.LayerID2->at(iv), cv.EDep->at(iv), cv.Time->at(iv), cv.Position_X->at(iv), cv.Position_Y->at(iv), cv.Position_Z->at(iv));
+				hitCV->push_back(cv.LayerID->at(iv), cv.LayerID1->at(iv), cv.LayerID2->at(iv), cv.EDep->at(iv), cv.Time->at(iv), cv.Position_X->at(iv), cv.Position_Y->at(iv), cv.Position_Z->at(iv));
 			}
 			for (int iv=0; iv<cvs.TrackID->size(); iv++){
-				cvH->push_back(cvs.LayerID->at(iv), cvs.LayerID1->at(iv), cvs.LayerID2->at(iv), cvs.EDep->at(iv), cvs.Time->at(iv), cvs.Position_X->at(iv), cvs.Position_Y->at(iv), cvs.Position_Z->at(iv));
+				hitCV->push_back(cvs.LayerID->at(iv), cvs.LayerID1->at(iv), cvs.LayerID2->at(iv), cvs.EDep->at(iv), cvs.Time->at(iv), cvs.Position_X->at(iv), cvs.Position_Y->at(iv), cvs.Position_Z->at(iv));
 			}
-			cvH->add_up();
-			cvH->sort();
+			hitCV->add_up();
+			hitCV->sort();
 		}
 
-		if(sci.fChain!=0){
-			sciH->clear();
-			for (int iv=0; iv<sci.TrackID->size(); iv++){
-				sciH->push_back(sci.LayerID->at(iv), sci.EDep->at(iv), sci.Time->at(iv), sci.Position_X->at(iv), sci.Position_Y->at(iv), sci.Position_Z->at(iv));
+		if(trigSci.fChain!=0){
+			hitTrigSci->clear();
+			for (int iv=0; iv<trigSci.TrackID->size(); iv++){
+				hitTrigSci->push_back(2*trigSci.LayerID->at(iv)+trigSci.LayerID1->at(iv), trigSci.EDep->at(iv), trigSci.Time->at(iv));
 			}
-			sciH->add_up();
-			sciH->sort();
+			hitTrigSci->process();
 		}
 
-		if(scint.fChain!=0){
-			scintH->clear();
-			scintA->clear();
-			for (int iv=0; iv<scint.TrackID->size(); iv++){
-				scintH->push_back(scint.TrackID->at(iv), scint.LayerID2->at(iv), scint.LayerID->at(iv), scint.LayerID1->at(iv), scint.EDep->at(iv), scint.Time->at(iv), scint.Position_X->at(iv), scint.Position_Y->at(iv), scint.Position_Z->at(iv));
+		if(genSci.fChain!=0){
+			hitGenSci->clear();
+			for (int iv=0; iv<genSci.TrackID->size(); iv++){
+				hitGenSci->push_back(genSci.LayerID->at(iv), genSci.EDep->at(iv), genSci.Time->at(iv), genSci.Position_X->at(iv), genSci.Position_Y->at(iv), genSci.Position_Z->at(iv));
 			}
-			scintH->add_up();
-			scintH->sort();
-			scintA->response(scintH);
-			scintA->add_up();
-			scintA->sort();
-			scintA->sumE();
+			hitGenSci->process();
+		}
+
+		if(hrdSci.fChain!=0){
+			hitHRDSci->clear();
+			for (int iv=0; iv<hrdSci.TrackID->size(); iv++){
+				hitHRDSci->push_back(hrdSci.TrackID->at(iv), hrdSci.LayerID2->at(iv), hrdSci.LayerID->at(iv), hrdSci.LayerID1->at(iv), hrdSci.EDep->at(iv), hrdSci.Time->at(iv), hrdSci.Position_X->at(iv), hrdSci.Position_Y->at(iv), hrdSci.Position_Z->at(iv));
+			}
+			hitHRDSci->process();
 		}
 
 		if((jentry%10000)==0){

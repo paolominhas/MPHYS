@@ -32,6 +32,8 @@ build/
 *.png
 *.root
 *.mcpl
+!MPhysDraftReport.pdf
+# but we can include the report
 
 # Compiled objects / shared libs
 *.o
