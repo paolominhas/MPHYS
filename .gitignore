@@ -35,6 +35,12 @@ build/
 !MPhysDraftReport.pdf
 # but we can include the report
 
+# the text summaries also csvs
+*.csv
+log_ana_*.txt
+*summary.txt
+fit_results*.txt
+
 # Compiled objects / shared libs
 *.o
 *.so
