@@ -32,7 +32,7 @@ import numpy as np
 import uproot
 
 try:
-    import final as tda
+    import other.data_analysis.segmentation.final as tda
 except ImportError:
     sys.exit("ERROR: tpc_dedx_analysis.py not found in the same directory.")
 

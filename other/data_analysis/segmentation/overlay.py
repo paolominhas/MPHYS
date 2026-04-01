@@ -27,7 +27,7 @@ import numpy as np
 # ── Import the analysis module unchanged ─────────────────────────────────────
 # tpc_dedx_analysis.py must be in the same directory or on PYTHONPATH.
 try:
-    import final as tda
+    import other.data_analysis.segmentation.final as tda
 except ImportError:
     sys.exit(
         "ERROR: tpc_dedx_analysis.py not found.\n"

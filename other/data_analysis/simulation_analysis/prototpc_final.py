@@ -50,7 +50,7 @@ import uproot
 
 # ── Import tpc_dedx_analysis unchanged ───────────────────────────────────────
 try:
-    import final as tda
+    import other.data_analysis.simulation_analysis.final as tda
 except ImportError:
     sys.exit(
         "ERROR: tpc_dedx_analysis.py not found.\n"

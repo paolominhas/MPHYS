@@ -30,7 +30,7 @@ import matplotlib.gridspec as gridspec
 
 # Import data-loading utilities from the main analysis script.
 # Make sure tpc_dedx_analysis.py is in the same directory (or on PYTHONPATH).
-from final import load_tpc_data, compute_dedx
+from other.data_analysis.simulation_analysis.final import load_tpc_data, compute_dedx
 
 
 # ══════════════════════════════════════════════════════════════════════════════

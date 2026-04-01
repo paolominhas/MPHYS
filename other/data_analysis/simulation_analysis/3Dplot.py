@@ -21,7 +21,7 @@ import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 import matplotlib.colors as mcolors
 
-from final import load_tpc_data
+from other.data_analysis.simulation_analysis.final import load_tpc_data
 
 
 def get_event_hits(data: dict, event: int) -> dict:
