@@ -1,14 +1,23 @@
 #!/usr/bin/env python3
 """Run every analysis step from config.yaml in sequence.
 
-Usage:
+Usage (from anywhere):
     python scripts/run_all.py              # run everything
     python scripts/run_all.py --only sim   # just simulation
+    python scripts/run_all.py --only sim exp
 """
 
 import argparse
 import importlib
 import sys
+from pathlib import Path
+
+# ── Ensure the repo root is on sys.path ──────────────────────────────────────
+# This makes `import hibeam` and `import scripts` work regardless of
+# whether you run from the repo root, from scripts/, or from anywhere else.
+REPO_ROOT = Path(__file__).resolve().parent.parent
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
 
 STEPS = {
     "sim":           "scripts.run_sim_dedx",
@@ -21,7 +30,8 @@ STEPS = {
 
 
 def main():
-    parser = argparse.ArgumentParser(description=__doc__)
+    parser = argparse.ArgumentParser(description=__doc__,
+        formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--only", nargs="*", choices=list(STEPS.keys()),
                         help="Run only these steps.")
     args = parser.parse_args()
@@ -34,7 +44,6 @@ def main():
         print(f"  RUNNING: {step}")
         print(f"{'═' * 70}\n")
         try:
-            # Import and run the script's main()
             mod = importlib.import_module(module_name)
             mod.main()
         except FileNotFoundError as e:

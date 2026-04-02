@@ -1,6 +1,14 @@
 #!/usr/bin/env python3
 """Generate 3D event displays and pad-plane heatmaps for all experimental runs."""
 
+import sys
+from pathlib import Path
+REPO_ROOT = Path(__file__).resolve().parent.parent
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
+
+
 from hibeam import config
 from hibeam.io import exp_loader
 from hibeam.plotting import style, displays
